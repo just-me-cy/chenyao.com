@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>title</title>
   
-  <link href="/atom.xml" rel="self"/>
+  <link href="/chenyao.com/atom.xml" rel="self"/>
   
   <link href="https://just-me-cy.github.io/chenyao.com/"/>
   <updated>2016-08-25T13:27:50.000Z</updated>
