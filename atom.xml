@@ -5,7 +5,7 @@
   <link href="/chenyao.com/atom.xml" rel="self"/>
   
   <link href="https://just-me-cy.github.io/chenyao.com/"/>
-  <updated>2016-08-31T13:19:41.000Z</updated>
+  <updated>2016-09-02T14:43:21.000Z</updated>
   <id>https://just-me-cy.github.io/chenyao.com/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>函数式编程一</title>
+    <link href="https://just-me-cy.github.io/chenyao.com/2016/09/02/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%80/"/>
+    <id>https://just-me-cy.github.io/chenyao.com/2016/09/02/函数式编程一/</id>
+    <published>2016-09-02T05:52:18.000Z</published>
+    <updated>2016-09-02T14:43:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>维基百科对函数式编程的定义</p>
+<blockquote>
+<p>函数式编程（英语：functional programming）或称函数程序设计，又称泛函编程，是一种编程范型，它将电脑运算视为数学上的函数计算，并且避免使用程序状态以及易变对象。函数编程语言最重要的基础是λ演算（lambda calculus）。而且λ演算的函数可以接受函数当作输入（引数）和输出（传出值）。</p>
+</blockquote>
+<h2 id="函数式编程语言特性"><a href="#函数式编程语言特性" class="headerlink" title="函数式编程语言特性"></a>函数式编程语言特性</h2><ol>
+<li>函数是第一类的对象<br>数学中要求函数必须有自变量和因变量，所以在函数式编程中，每个函数必须有输入参数和返回值</li>
+<li>无副作用<br>函数的执行既不影响外界也不会被外界影响，只要参数不变，返回值一定不变</li>
+<li>柯里化<br>包含了多个参数的函数转换成多个包含一个参数的函数,分步计算,讲一个复杂的函数可以分解成多个简单函数，并且函数调用时可以逐步进行</li>
+<li>不可变性</li>
+<li>高阶函数<br>在函数式编程中，将参数为函数、或者返回值为函数的这类函数统称之为“高阶函数”，前面已经举过这样的例子。在数学中，对一个函数求导函数的过程，其实就是高阶函数，原函数经过求导变换后，得到导函数，那么原函数便是输入参数，导函数便是返回值。</li>
+</ol>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="二维数组变一维"><a href="#二维数组变一维" class="headerlink" title="二维数组变一维"></a>二维数组变一维</h3><pre><code>实现的方法有很多，分别看下一般实现和以函数式编程方式去实现
+</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 版本1</span></div><div class="line">   <span class="function"><span class="keyword">function</span> <span class="title">merge2dArrayIntoOne1</span>(<span class="params">arrays</span>) </span>&#123;</div><div class="line">     <span class="keyword">var</span> count = arrays.length;</div><div class="line">     <span class="keyword">var</span> merged = <span class="keyword">new</span> <span class="built_in">Array</span>(count);</div><div class="line">     <span class="keyword">var</span> c = <span class="number">0</span>;</div><div class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; count; ++i) &#123;</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>, jlen = arrays[i].length; j &lt; jlen; ++j) &#123;</div><div class="line">         merged[c++] = arrays[i][j];</div><div class="line">       &#125;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> merged</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   <span class="comment">//版本2</span></div><div class="line">   <span class="function"><span class="keyword">function</span> <span class="title">merge2dArrayIntoOne2</span>(<span class="params">arrays</span>)</span>&#123;</div><div class="line">     <span class="keyword">var</span> ret = [];</div><div class="line">     <span class="keyword">var</span> len = arrays.length;</div><div class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;len; i++)&#123;</div><div class="line">       ret = ret.concat(arrays[i]);</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> ret;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="comment">// 版本3</span></div><div class="line">   <span class="function"><span class="keyword">function</span> <span class="title">merge2dArrayIntoOne3</span>(<span class="params">arrays</span>)</span>&#123;</div><div class="line">     <span class="keyword">return</span> arrays.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">previous,current</span>)</span>&#123;</div><div class="line">       <span class="keyword">return</span> previous.concat(current);</div><div class="line">     &#125;);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>  对比3个版本，版本3的实现是简洁，如果用es6的语法写，更清楚</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> merge2dArrayIntoOne4 = arrays =&gt; arrays.reduce((p,c) =&gt; p.concat(c));</div></pre></td></tr></table></figure>
+<h3 id="从一句话中依次取4个词，它们不包括数字1到9"><a href="#从一句话中依次取4个词，它们不包括数字1到9" class="headerlink" title="从一句话中依次取4个词，它们不包括数字1到9"></a>从一句话中依次取4个词，它们不包括数字1到9</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 版本1</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFirstFour1</span> (<span class="params">str</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> inputArr = str.split(<span class="string">' '</span>),</div><div class="line">    i,</div><div class="line">    len = inputArr.length,</div><div class="line">    count,</div><div class="line">    ret = [];</div><div class="line">  </div><div class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>, count = <span class="number">0</span>; i &lt; len, count &lt; <span class="number">4</span>; i++) &#123;</div><div class="line">    <span class="keyword">if</span> (!<span class="regexp">/[1-9]/</span>.test(inputArr[i])) &#123;</div><div class="line">      ret.push(inputArr[i]);</div><div class="line">      count ++;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 版本2</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFirstFour2</span> (<span class="params">str</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> str.split(<span class="string">' '</span>).filter(i =&gt; !<span class="regexp">/[1-9]/</span>.test(i)).slice(<span class="number">0</span>,<span class="number">4</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>版本2看起来也十分简洁</p>
+<h3 id="存取对象的属性"><a href="#存取对象的属性" class="headerlink" title="存取对象的属性"></a>存取对象的属性</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//版本1</span></div><div class="line"><span class="keyword">var</span> values = [];</div><div class="line"><span class="keyword">var</span> accumulate = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> values.push(obj.name);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> obj1 = &#123;name:<span class="number">1</span>&#125;;</div><div class="line"><span class="keyword">var</span> obj2 = &#123;name:<span class="number">2</span>&#125;;</div><div class="line">accumulate(obj1);</div><div class="line">accumulate(obj2);</div><div class="line"></div><div class="line"><span class="comment">// 版本2</span></div><div class="line"><span class="keyword">var</span> accumulate2 = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> value = [];</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</div><div class="line">    obj &amp;&amp; obj.name &amp;&amp; value.push(obj.name);</div><div class="line">    <span class="keyword">return</span> value;</div><div class="line">  &#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h2&gt;&lt;p&gt;维基百科对函数式编程的定义&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;函数式编程（英语：functional programming）或称函数
+    
+    </summary>
+    
+      <category term="js" scheme="https://just-me-cy.github.io/chenyao.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="https://just-me-cy.github.io/chenyao.com/tags/js/"/>
+    
+      <category term="FP" scheme="https://just-me-cy.github.io/chenyao.com/tags/FP/"/>
+    
+  </entry>
   
   <entry>
     <title>reselect实践</title>
