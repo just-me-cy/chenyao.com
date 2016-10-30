@@ -1,0 +1,652 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/chenyao.com/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/chenyao.com/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/chenyao.com/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="webpack," />
+
+
+
+
+
+  <link rel="alternate" href="/chenyao.com/atom.xml" title="chenyao's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/chenyao.com/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="webpack特点
+可以将所有的静态资源（JS, CSS, Images, font, HTML）当成模块进行打包
+自动管理依赖，将按需加载模块进行代码拆分(code splitting)，实际调用时异步加载
+社区活跃，有非常多的plugins和loaders，支持多种规范的加载(ES6，CommonJS，AMD)，配置灵活
+支持性能优化，具有开发环境下工具(SourceMaps，developm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack打包">
+<meta property="og:url" content="https://just-me-cy.github.io/chenyao.com/2016/09/28/webpack打包/index.html">
+<meta property="og:site_name" content="chenyao's blog">
+<meta property="og:description" content="webpack特点
+可以将所有的静态资源（JS, CSS, Images, font, HTML）当成模块进行打包
+自动管理依赖，将按需加载模块进行代码拆分(code splitting)，实际调用时异步加载
+社区活跃，有非常多的plugins和loaders，支持多种规范的加载(ES6，CommonJS，AMD)，配置灵活
+支持性能优化，具有开发环境下工具(SourceMaps，developm">
+<meta property="og:updated_time" content="2016-10-30T10:32:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack打包">
+<meta name="twitter:description" content="webpack特点
+可以将所有的静态资源（JS, CSS, Images, font, HTML）当成模块进行打包
+自动管理依赖，将按需加载模块进行代码拆分(code splitting)，实际调用时异步加载
+社区活跃，有非常多的plugins和loaders，支持多种规范的加载(ES6，CommonJS，AMD)，配置灵活
+支持性能优化，具有开发环境下工具(SourceMaps，developm">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://just-me-cy.github.io/chenyao.com/2016/09/28/webpack打包/"/>
+
+  <title> webpack打包 | chenyao's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/chenyao.com/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">chenyao's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/chenyao.com/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/chenyao.com/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/chenyao.com/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/chenyao.com/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                webpack打包
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-28T21:06:08+08:00" content="2016-09-28">
+              2016-09-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/chenyao.com/categories/webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">webpack</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="webpack特点"><a href="#webpack特点" class="headerlink" title="webpack特点"></a>webpack特点</h2><ol>
+<li>可以将所有的静态资源（JS, CSS, Images, font, HTML）当成模块进行打包</li>
+<li>自动管理依赖，将按需加载模块进行代码拆分(code splitting)，实际调用时异步加载</li>
+<li>社区活跃，有非常多的<code>plugins</code>和<code>loaders</code>，支持多种规范的加载(ES6，CommonJS，AMD)，配置灵活</li>
+<li>支持性能优化，具有开发环境下工具(SourceMaps，development middleware，develop server)</li>
+</ol>
+<h2 id="使用方式-CLI和API"><a href="#使用方式-CLI和API" class="headerlink" title="使用方式:CLI和API"></a>使用方式:CLI和API</h2><ol>
+<li><p>Command Line Interface，命令行用户界面<br>全局安装后，在命令行中直接执行webpack。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">webpack &lt;entry&gt; &lt;output&gt;</div></pre></td></tr></table></figure>
+<p>如果非全局安装，可通过package.json的script配置打包命令。<br>webpack的打包参数很多，可以直接通过命令行参数指定，也可以通过配置文件webpack.config.js指定。<br>很多配置都是从命令行参数中映射过来的</p>
+</li>
+<li><p>API<br>将webpack作为Node.js模块使用<br>一般用于和其它构建工具（gulp,grunt等）一起使用</p>
+</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mkdir webpackTest &amp;&amp; cd webpackTest</div><div class="line">npm init</div><div class="line">npm i webpack webpack-dev-server -D</div><div class="line">mkdir src &amp;&amp; cd src</div></pre></td></tr></table></figure>
+<h2 id="命令行相关参数"><a href="#命令行相关参数" class="headerlink" title="命令行相关参数"></a>命令行相关参数</h2><h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><p>  <code>webpack</code> 开发环境下编译<br>  <code>webpack -p</code> 产品编译及压缩<br>  <code>webpack --watch</code> 开发环境下持续的监听文件变动来进行编译(非常快!)<br>  <code>webpack -d</code> 引入 <code>source maps</code><br>  <code>webpack --progress</code> 显示构建进度<br>  <code>webpack --display-error-details</code> 显示打包过程中的出错信息<br>  <code>webpack --profile</code> 输出性能数据，可以看到每一步的耗时<br>  <code>webpack --display-modules</code> 显示隐藏模块<br>  <code>webpack --display-chunks</code> 显示每个chunk下的详细信息</p>
+<h3 id="webpack-dev-server"><a href="#webpack-dev-server" class="headerlink" title="webpack-dev-server"></a>webpack-dev-server</h3><p>  一个小型的node.js Express资源服务器。为通过webpack打包生成的资源文件提供Web服务。webpack-dev-server发送关于编译状态的消息到客户端，客户端根据消息作出响应。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">webpack-dev-server 在 localhost:8080 建立一个 Web 服务器</div><div class="line">webpack-dev-server --devtool eval - 为代码创建源地址</div><div class="line">webpack-dev-server --progress - 显示合并代码进度</div><div class="line">webpack-dev-server --colors - 命令行中显示颜色</div><div class="line">webpack-dev-server --inline 可以自动加上dev-server的管理代码，实现热更新</div><div class="line">webpack-dev-server --hot 开启代码热替换，可以加上HotModuleReplacementPlugin</div><div class="line">webpack-dev-server --port 3000 设置服务端口</div></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="entry"><a href="#entry" class="headerlink" title="entry"></a>entry</h3><p>  指定应用的入口点,有3种格式：<br>  string：指定单个入口文件<br>  array：多个入口文件，最终打包到一起<br>  object：多 chunk，key 为 chunk 的 名字，value 指定这 chunk 的入口文件<br>  string 和 array 最终会打包成一个文件，object 则可以打包出多个文件</p>
+<h3 id="output"><a href="#output" class="headerlink" title="output"></a>output</h3><p>  指定打包后的出口文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">// 单个文件输出</div><div class="line">  module.exports = &#123;</div><div class="line">    entry: path.resolve(__dirname, &apos;src/index.js&apos;), //指定输出文件的文件路径</div><div class="line">    output: &#123;</div><div class="line">      path: path.resolve(__dirname, &apos;build&apos;), //指定输出文件的文件名</div><div class="line">      filename: &apos;bundle.js&apos;</div><div class="line">    &#125;,</div><div class="line">    ...</div><div class="line">  &#125;;</div><div class="line">// 多个文件输出</div><div class="line">module.exports = &#123;</div><div class="line">    entry: &#123;</div><div class="line">        a: &apos;a.js&apos;,</div><div class="line">        b: &apos;b.js&apos;</div><div class="line">    &#125;,</div><div class="line">    output: &#123;</div><div class="line">        path:  path.resolve(__dirname, &apos;build&apos;),</div><div class="line">        filename: &quot;[name].js&quot;</div><div class="line">    &#125;</div><div class="line">  ...</div><div class="line">&#125;;</div><div class="line">// 打包库文件,用常规的模块包裹头</div><div class="line">module.exports = &#123;</div><div class="line">    entry: &#123;</div><div class="line">        a: &apos;a.js&apos;</div><div class="line">    &#125;,</div><div class="line">    output: &#123;</div><div class="line">        path: path.resolve(__dirname, &apos;build&apos;),</div><div class="line">        filename: &quot;Lib.js&quot;,</div><div class="line">        library: &apos;Lib&apos;,</div><div class="line">        libraryTarget: &apos;umd&apos;</div><div class="line">    &#125;</div><div class="line">  ...</div><div class="line">&#125;;</div><div class="line">//输出的Lib.js文件就有了常规模块化包裹头：</div><div class="line">(function webpackUniversalModuleDefinition(root, factory) &#123;</div><div class="line">    if(typeof exports === &apos;object&apos; &amp;&amp; typeof module === &apos;object&apos;)</div><div class="line">        module.exports = factory();</div><div class="line">    else if(typeof define === &apos;function&apos; &amp;&amp; define.amd)</div><div class="line">        define([], factory);</div><div class="line">    else if(typeof exports === &apos;object&apos;)</div><div class="line">        exports[&quot;L&quot;] = factory();</div><div class="line">    else</div><div class="line">        root[&quot;L&quot;] = factory();</div><div class="line">&#125;)(this, function() &#123;</div><div class="line">return /******/ (function(modules) &#123; // webpackBootstrap</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<h3 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h3><p>分析依赖时的路径识别的配置</p>
+<h3 id="externals"><a href="#externals" class="headerlink" title="externals"></a>externals</h3><p>  配置外部依赖的，如果使用某些第三方库的时候，就可以通过这个配置来识别外部第三方库的依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  entry: &apos;./main.js&apos;,</div><div class="line">  output: &#123;</div><div class="line">    filename: &apos;L.js&apos;,</div><div class="line">    library: &apos;L&apos;,</div><div class="line">    libraryTarget: &apos;umd&apos;</div><div class="line">  &#125;,</div><div class="line">  externals: &#123;</div><div class="line">    &apos;jquery&apos;: &#123;</div><div class="line">      root: &apos;jquery&apos;,</div><div class="line">      amd: &apos;jquery&apos;,</div><div class="line">      commonjs2: &apos;jquery&apos;,</div><div class="line">      commonjs: &apos;jquery&apos;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>打包后如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">(function webpackUniversalModuleDefinition(root, factory) &#123;</div><div class="line">    if(typeof exports === &apos;object&apos; &amp;&amp; typeof module === &apos;object&apos;)</div><div class="line">        module.exports = factory(require(&quot;jquery&quot;));</div><div class="line">    else if(typeof define === &apos;function&apos; &amp;&amp; define.amd)</div><div class="line">        define([&quot;jquery&quot;], factory);</div><div class="line">    else if(typeof exports === &apos;object&apos;)</div><div class="line">        exports[&quot;Q&quot;] = factory(require(&quot;jquery&quot;));</div><div class="line">    else</div><div class="line">        root[&quot;Q&quot;] = factory(root[&quot;jQuery&quot;]);</div><div class="line">&#125;)(this, function(__WEBPACK_EXTERNAL_MODULE_4__) &#123;</div><div class="line">return /******/ (function(modules) &#123; // webpackBootstrap</div></pre></td></tr></table></figure></p>
+<h3 id="plugins和loaders"><a href="#plugins和loaders" class="headerlink" title="plugins和loaders"></a>plugins和loaders</h3><ol>
+<li><p>loaders<br>webpack本身只能处理js模块，如果要处理其他类型的文件，就需要使用<code>loader</code>进行转换。<br>loader是运行在nodejs下的函数，入参是源文件，返回值是转换后的结果，主要用于转换不同类型的资源文件，将他们加载到js文件中。<br>多个loader通过管道方式链式调用，每个loader把资源转换成任意格式并传递给下一个<code>loader</code>，最后一个<code>loader</code>必须返回<code>JavaScript</code>。<br>常见的loaders: style-loader、css-loader、less-loader、sass-loader、jsx-loader、url-loader、babel-loader、file-loader等<br>安装及配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">npm i xxx-loader -D</div><div class="line"></div><div class="line"><span class="comment">// webpack.config.js</span></div><div class="line"><span class="built_in">module</span>: &#123;</div><div class="line">  loaders: [</div><div class="line">    &#123;test: <span class="regexp">/\.js$/</span>, loader: <span class="string">"babel"</span>&#125;, <span class="comment">// 通过文件扩展名（或正则表达式）绑定不同类型的文件</span></div><div class="line">    &#123;test: <span class="regexp">/\.css$/</span>, loader: <span class="string">"style!css"</span>&#125;,</div><div class="line">    &#123;test: <span class="regexp">/\.(jpg|png)$/</span>, loader: <span class="string">"url?limit=8192"</span>&#125;, <span class="comment">// 可以接受参数，传递配置项给url-loader</span></div><div class="line">    &#123;test: <span class="regexp">/\.less$/</span>, loader: <span class="string">"style!css!less"</span>&#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>plugins<br>webpack本身提供了丰富的插件用来满足不同需求，比如commonsPlugin，在打包多个入口文件时会提取出公用的部分，生成common.js<br>常用插件：<br>UglifyJsPlugin：压缩资源<br>CommonsChunkPlugin: 抽取出第三方资源，提取出应用中公共的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// webpack.config.js</div><div class="line"> var openBrowserWebpackPlugin = require(&apos;open-browser-webpack-plugin&apos;);</div><div class="line"> ......</div><div class="line">  plugin: [</div><div class="line">    new openBrowserWebpackPlugin(&#123; url: &apos;http://localhost:8080&apos; &#125;)</div><div class="line">  ]</div></pre></td></tr></table></figure>
+<p>DefinePlugin：定义变量，将变量插件代码吗</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">// webpack.config.js</div><div class="line">  ...</div><div class="line">  const production = process.env.NODE_ENV ? process.env.NODE_ENV.trim() === &apos;prod&apos; : false;</div><div class="line">  ...</div><div class="line">  plugin: [</div><div class="line">     new webpack.DefinePlugin(&#123;</div><div class="line">      __SERVER__: !production,</div><div class="line">      __DEVELOPMENT__: !production,</div><div class="line">      __DEVTOOLS__: !production,</div><div class="line">      &apos;process.env&apos;: &#123;</div><div class="line">        BABEL_ENV: JSON.stringify(process.env.NODE_ENV),</div><div class="line">      &#125;,</div><div class="line">    &#125;),</div><div class="line">  ]</div><div class="line"></div><div class="line">// package.json</div><div class="line">&quot;scripts&quot;: &#123;</div><div class="line">    &quot;publish-mac&quot;: &quot;export NODE_ENV=prod &amp;&amp; webpack-dev-server -p --progress --colors&quot;,</div><div class="line">    &quot;publish-win&quot;: &quot;set NODE_ENV=prod &amp;&amp; webpack-dev-server -p --progress --colors&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 执行时变量会被替换为ture或false</div><div class="line">if (__DEV__) &#123;</div><div class="line">  console.warn(&apos;开发环境&apos;);</div><div class="line">&#125;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>extract-text-webpack-plugin:css文件单独打包<br>html-webpack-plugin：解析html模板，生成嵌入了打包资源的index.html页面<br>open-browser-webpack-plugin：资源构建完后，自动打开浏览器，提高开发体验</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/chenyao.com/tags/webpack/" rel="tag">#webpack</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/chenyao.com/2016/09/15/私有npm部署/" rel="next" title="私有npm部署">
+                <i class="fa fa-chevron-left"></i> 私有npm部署
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/11408208"
+               alt="just-me-cy" />
+          <p class="site-author-name" itemprop="name">just-me-cy</p>
+          <p class="site-description motion-element" itemprop="description">寄蜉蝣于天地,渺沧海之一粟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/chenyao.com/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/chenyao.com/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/chenyao.com/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/chenyao.com/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack特点"><span class="nav-number">1.</span> <span class="nav-text">webpack特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方式-CLI和API"><span class="nav-number">2.</span> <span class="nav-text">使用方式:CLI和API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行相关参数"><span class="nav-number">4.</span> <span class="nav-text">命令行相关参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack"><span class="nav-number">4.1.</span> <span class="nav-text">webpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-dev-server"><span class="nav-number">4.2.</span> <span class="nav-text">webpack-dev-server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">5.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#entry"><span class="nav-number">5.1.</span> <span class="nav-text">entry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#output"><span class="nav-number">5.2.</span> <span class="nav-text">output</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resolve"><span class="nav-number">5.3.</span> <span class="nav-text">resolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#externals"><span class="nav-number">5.4.</span> <span class="nav-text">externals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plugins和loaders"><span class="nav-number">5.5.</span> <span class="nav-text">plugins和loaders</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">just-me-cy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/chenyao.com/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/chenyao.com/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/chenyao.com/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/chenyao.com/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/chenyao.com/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/chenyao.com/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/chenyao.com/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/chenyao.com/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/chenyao.com/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/chenyao.com/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/chenyao.com/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/chenyao.com/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/chenyao.com/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
