@@ -305,9 +305,9 @@
       <category term="redux" scheme="https://just-me-cy.github.io/chenyao.com/categories/redux/"/>
     
     
-      <category term="redux" scheme="https://just-me-cy.github.io/chenyao.com/tags/redux/"/>
-    
       <category term="reselect" scheme="https://just-me-cy.github.io/chenyao.com/tags/reselect/"/>
+    
+      <category term="redux" scheme="https://just-me-cy.github.io/chenyao.com/tags/redux/"/>
     
   </entry>
   
@@ -344,9 +344,9 @@
       <category term="react" scheme="https://just-me-cy.github.io/chenyao.com/categories/react/"/>
     
     
-      <category term="antd" scheme="https://just-me-cy.github.io/chenyao.com/tags/antd/"/>
-    
       <category term="redux" scheme="https://just-me-cy.github.io/chenyao.com/tags/redux/"/>
+    
+      <category term="antd" scheme="https://just-me-cy.github.io/chenyao.com/tags/antd/"/>
     
   </entry>
   
