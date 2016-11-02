@@ -5,7 +5,7 @@
   <link href="/chenyao.com/atom.xml" rel="self"/>
   
   <link href="https://just-me-cy.github.io/chenyao.com/"/>
-  <updated>2016-10-30T10:32:51.000Z</updated>
+  <updated>2016-11-02T01:35:08.000Z</updated>
   <id>https://just-me-cy.github.io/chenyao.com/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>webpack打包</title>
-    <link href="https://just-me-cy.github.io/chenyao.com/2016/09/28/webpack%E6%89%93%E5%8C%85/"/>
-    <id>https://just-me-cy.github.io/chenyao.com/2016/09/28/webpack打包/</id>
-    <published>2016-09-28T13:06:08.000Z</published>
-    <updated>2016-10-30T10:32:51.000Z</updated>
+    <link href="https://just-me-cy.github.io/chenyao.com/2016/10/28/webpack%E6%89%93%E5%8C%85/"/>
+    <id>https://just-me-cy.github.io/chenyao.com/2016/10/28/webpack打包/</id>
+    <published>2016-10-28T13:06:08.000Z</published>
+    <updated>2016-11-02T01:35:08.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="webpack特点"><a href="#webpack特点" class="headerlink" title="webpack特点"></a>webpack特点</h2><ol>
 <li>可以将所有的静态资源（JS, CSS, Images, font, HTML）当成模块进行打包</li>
@@ -305,9 +305,9 @@
       <category term="redux" scheme="https://just-me-cy.github.io/chenyao.com/categories/redux/"/>
     
     
-      <category term="reselect" scheme="https://just-me-cy.github.io/chenyao.com/tags/reselect/"/>
-    
       <category term="redux" scheme="https://just-me-cy.github.io/chenyao.com/tags/redux/"/>
+    
+      <category term="reselect" scheme="https://just-me-cy.github.io/chenyao.com/tags/reselect/"/>
     
   </entry>
   
@@ -344,9 +344,9 @@
       <category term="react" scheme="https://just-me-cy.github.io/chenyao.com/categories/react/"/>
     
     
-      <category term="redux" scheme="https://just-me-cy.github.io/chenyao.com/tags/redux/"/>
-    
       <category term="antd" scheme="https://just-me-cy.github.io/chenyao.com/tags/antd/"/>
+    
+      <category term="redux" scheme="https://just-me-cy.github.io/chenyao.com/tags/redux/"/>
     
   </entry>
   
